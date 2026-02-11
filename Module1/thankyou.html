@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Cash.Dev Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .thank-you-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkmark-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out 0.3s backwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .checkmark {
+            font-size: 4rem;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .details-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .details-box h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .detail-item {
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .detail-item strong {
+            color: #667eea;
+            display: inline-block;
+            width: 80px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .info-text {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .thank-you-container {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="checkmark-circle">
+            <div class="checkmark">✓</div>
+        </div>
+
+        <h1>Thank You!</h1>
+        <p class="message">Your message has been successfully sent. We appreciate you reaching out to us!</p>
+
+        <div class="details-box">
+            <h3>📋 Submission Details</h3>
+            <div class="detail-item">
+                <strong>Name:</strong> <span id="displayName"></span>
+            </div>
+            <div class="detail-item">
+                <strong>Email:</strong> <span id="displayEmail"></span>
+            </div>
+            <div class="detail-item">
+                <strong>Subject:</strong> <span id="displaySubject"></span>
+            </div>
+        </div>
+
+        <p class="message">Our team will review your message and get back to you within 24-48 hours.</p>
+
+        <div class="buttons">
+            <a href="index.html" class="btn">← Back to Home</a>
+            <a href="index.html#contact" class="btn btn-secondary">Send Another Message</a>
+        </div>
+
+        <p class="info-text">If you need immediate assistance, please call us at +1 (555) 123-4567</p>
+    </div>
+
+    <script>
+        // Get data from sessionStorage
+        const name = sessionStorage.getItem('contactName');
+        const email = sessionStorage.getItem('contactEmail');
+        const subject = sessionStorage.getItem('contactSubject');
+
+        // Display the data
+        if (name) {
+            document.getElementById('displayName').textContent = name;
+        }
+        if (email) {
+            document.getElementById('displayEmail').textContent = email;
+        }
+        if (subject) {
+            document.getElementById('displaySubject').textContent = subject;
+        }
+
+        // Clear sessionStorage after displaying (optional - keeps data fresh)
+        // Uncomment the line below if you want to clear the data after displaying
+        // sessionStorage.clear();
+    </script>
+</body>
+</html>
