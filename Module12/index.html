@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>techgear — Product Landing</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#121212;
+      --bg2:#0f0f0f;
+      --panel:#1b1b1b;
+      --panel2:#202020;
+      --stroke:rgba(255,255,255,.08);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.62);
+      --muted2:rgba(255,255,255,.45);
+      --green:#28ff63;
+      --green2:#0fd84a;
+      --shadow:0 16px 46px rgba(0,0,0,.55);
+      --radius:18px;
+      --radius2:26px;
+      --container:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 700px at 20% 12%, rgba(40,255,99,.10), transparent 60%),
+        radial-gradient(800px 600px at 80% 20%, rgba(40,255,99,.06), transparent 62%),
+        linear-gradient(180deg, #0c0c0c 0%, #101010 60%, #0b0b0b 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{
+      width:min(var(--container), 92vw);
+      margin-inline:auto;
+    }
+
+    /* page frame like the mock */
+    .frame{
+      padding:48px 0 90px;
+      background:
+        radial-gradient(1200px 800px at 50% -10%, rgba(255,255,255,.04), transparent 60%);
+    }
+    .card{
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(900px 700px at 25% 10%, rgba(40,255,99,.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* subtle grid texture */
+    .grid{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity:.08;
+      mask-image: radial-gradient(70% 50% at 35% 12%, #000 45%, transparent 75%);
+      pointer-events:none;
+    }
+
+    /* NAV */
+    header{
+      padding:22px 28px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      position:relative;
+      z-index:2;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .brand .logo{
+      width:28px;height:28px;border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(40,255,99,.55), transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 25px rgba(0,0,0,.4);
+    }
+    .brand span{
+      font-size:14px;
+      text-transform:lowercase;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+    nav a{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.3px;
+      padding:10px 10px;
+      border-radius:10px;
+      transition:.2s ease;
+    }
+    nav a:hover{ color:var(--text); background:rgba(255,255,255,.04) }
+    nav a.active{
+      color:var(--text);
+      position:relative;
+    }
+    nav a.active:after{
+      content:"";
+      position:absolute;
+      left:10px; right:10px;
+      bottom:4px;
+      height:2px;
+      border-radius:999px;
+      background:var(--green);
+      box-shadow: 0 0 0 6px rgba(40,255,99,.10);
+    }
+
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-size:12px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.18s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn-ghost{
+      background:rgba(255,255,255,.04);
+      border-color:rgba(255,255,255,.10);
+      color:var(--text);
+    }
+    .btn-ghost:hover{ background:rgba(255,255,255,.06); transform:translateY(-1px) }
+    .btn-primary{
+      background:linear-gradient(180deg, var(--green) 0%, var(--green2) 100%);
+      color:#0b160f;
+      box-shadow: 0 10px 22px rgba(15,216,74,.18);
+    }
+    .btn-primary:hover{ transform:translateY(-1px); filter:saturate(1.05) }
+
+    .burger{
+      display:none;
+      width:42px;height:42px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      align-items:center;justify-content:center;
+      cursor:pointer;
+    }
+    .burger span{
+      width:18px;height:2px;background:rgba(255,255,255,.85);
+      position:relative;
+      display:block;
+    }
+    .burger span:before,.burger span:after{
+      content:""; position:absolute; left:0;
+      width:18px;height:2px;background:rgba(255,255,255,.85);
+    }
+    .burger span:before{ top:-6px }
+    .burger span:after{ top:6px }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 20px;
+      padding: 18px 28px 10px;
+      align-items:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:rgba(255,255,255,.7);
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.2px;
+      margin-bottom: 8px;
+    }
+    .kicker .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(40,255,99,.10);
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size: clamp(28px, 3.3vw, 42px);
+      line-height:1.1;
+      letter-spacing:-.5px;
+    }
+    .hero .sub{
+      margin:0 0 10px;
+      color:rgba(255,255,255,.8);
+      font-weight:600;
+      font-size: 13px;
+    }
+    .hero p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.9;
+      max-width: 520px;
+    }
+
+    .price{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 16px;
+    }
+    .price strong{
+      color: var(--green);
+      font-size:12px;
+      letter-spacing:.4px;
+    }
+    .price span{
+      color:var(--muted2);
+      font-size:12px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .hero-visual{
+      position:relative;
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(520px 420px at 70% 30%, rgba(40,255,99,.14), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.35));
+      min-height: 300px;
+      overflow:hidden;
+    }
+    .mouse{
+      position:absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.55)),
+        url("https://images.unsplash.com/photo-1593642532973-d31b6557fa68?auto=format&fit=crop&w=1200&q=70") center/cover;
+      transform:scale(1.04);
+      filter:contrast(1.05) saturate(1.05);
+    }
+    .g502{
+      position:absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-weight:900;
+      font-size: 92px;
+      letter-spacing: 2px;
+      color: rgba(40,255,99,.88);
+      text-shadow: 0 20px 50px rgba(0,0,0,.55);
+      opacity:.95;
+    }
+
+    /* divider text */
+    .divider{
+      text-align:center;
+      padding: 28px 22px 8px;
+      color:rgba(255,255,255,.85);
+      font-weight:700;
+      font-size: 14px;
+      position:relative;
+      z-index:2;
+    }
+    .divider small{
+      display:block;
+      color: rgba(40,255,99,.9);
+      font-weight:800;
+      margin-top: 4px;
+      font-size: 11px;
+      letter-spacing:.4px;
+    }
+
+    /* Categories */
+    .cats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 16px 28px 26px;
+      position:relative;
+      z-index:2;
+    }
+    .cat{
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 18px 16px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      transition:.18s ease;
+      min-height: 128px;
+    }
+    .cat:hover{ transform: translateY(-2px); background: rgba(255,255,255,.05) }
+    .cat .thumb{
+      width:86px;height:56px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.25);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .cat .thumb img{
+      width: 120%;
+      height: 120%;
+      object-fit:cover;
+      opacity:.9;
+      filter: contrast(1.05);
+    }
+    .cat strong{
+      font-size:12px;
+      color: rgba(255,255,255,.85);
+      font-weight:700;
+    }
+
+    /* Services block */
+    .services{
+      padding: 14px 28px 30px;
+      position:relative;
+      z-index:2;
+    }
+    .services h2{
+      text-align:center;
+      margin: 18px 0 0;
+      font-size: 34px;
+      letter-spacing: 2px;
+      color: rgba(40,255,99,.14);
+      font-weight:900;
+    }
+    .services h3{
+      text-align:center;
+      margin: -6px 0 4px;
+      font-size: 14px;
+      letter-spacing:.2px;
+    }
+    .services p{
+      text-align:center;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .service-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .service{
+      display:flex;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      transition:.18s ease;
+      position:relative;
+      overflow:hidden;
+      min-height: 92px;
+    }
+    .service:hover{ transform: translateY(-2px); background: rgba(255,255,255,.05) }
+    .service:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(500px 180px at 15% 30%, rgba(40,255,99,.10), transparent 60%);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .service > *{ position:relative; z-index:1; }
+
+    .svc-ico{
+      width:52px;height:52px;border-radius:18px;
+      background: rgba(40,255,99,.10);
+      border:1px solid rgba(40,255,99,.22);
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto;
+      font-weight:900;
+      color: var(--green);
+      box-shadow: 0 10px 22px rgba(0,0,0,.35);
+    }
+    .service strong{
+      display:block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      letter-spacing:.1px;
+    }
+    .service span{
+      display:block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height:1.8;
+    }
+
+    /* Members */
+    .members{
+      padding: 22px 28px 34px;
+      position:relative;
+      z-index:2;
+    }
+    .members h3{
+      text-align:center;
+      margin:0;
+      font-size: 14px;
+      font-weight:800;
+    }
+    .members small{
+      display:block;
+      text-align:center;
+      margin-top: 4px;
+      color: var(--green);
+      font-weight:800;
+      font-size: 11px;
+      letter-spacing:.3px;
+    }
+    .logos{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .logo-box{
+      height: 76px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      display:flex; align-items:center; justify-content:center;
+      color: rgba(255,255,255,.65);
+      font-weight:900;
+      letter-spacing: 1px;
+      position:relative;
+      overflow:hidden;
+    }
+    .logo-box:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(420px 200px at 30% 30%, rgba(40,255,99,.08), transparent 60%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .logo-box span{ position:relative; z-index:1; font-size: 18px; opacity:.85; }
+
+    /* Floating bottom-right product (decor) */
+    .float-mouse{
+      position:absolute;
+      right:-48px;
+      bottom: 130px;
+      width: 190px;
+      height: 260px;
+      border-radius: 28px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.65)),
+        url("https://images.unsplash.com/photo-1607082350899-7e105aa886ae?auto=format&fit=crop&w=800&q=70") center/cover;
+      box-shadow: var(--shadow);
+      transform: rotate(10deg);
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    /* Footer */
+    footer{
+      padding: 18px 28px 26px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color: rgba(255,255,255,.45);
+      font-size: 11px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      nav{ display:none; }
+      .burger{ display:flex; }
+      .hero{ grid-template-columns: 1fr; }
+      .g502{ font-size: 74px; right: 12px; }
+      .cats{ grid-template-columns: 1fr; }
+      .service-grid{ grid-template-columns: 1fr; }
+      .logos{ grid-template-columns: repeat(2, 1fr); }
+      .float-mouse{ display:none; }
+    }
+
+    /* show/hide mobile menu */
+    .mobile-menu{
+      display:none;
+      position:absolute;
+      right: 16px;
+      top: 68px;
+      width: min(320px, 92vw);
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(15,15,15,.92);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 46px rgba(0,0,0,.55);
+      padding: 10px;
+      z-index:10;
+    }
+    .mobile-menu a{
+      display:block;
+      padding: 12px 12px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-weight:700;
+      font-size: 12px;
+    }
+    .mobile-menu a:hover{ background: rgba(255,255,255,.05); color: var(--text); }
+  </style>
+</head>
+
+<body>
+  <div class="frames">
+    <div class="containers">
+      <div class="card">
+        <div class="grid"></div>
+        <div class="float-mouse" aria-hidden="true"></div>
+
+        <!-- NAV -->
+        <header>
+          <a class="brand" href="#">
+            <div class="logo"></div>
+            <span>techgear</span>
+          </a>
+
+          <nav aria-label="Primary">
+            <a class="active" href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Services</a>
+            <a href="#">Members</a>
+            <a href="#">Contacts</a>
+          </nav>
+
+          <div class="nav-right">
+            <a class="btn btn-ghost" href="#">Sign In</a>
+            <div class="burger" id="burger" role="button" tabindex="0" aria-label="Open menu">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="mobile-menu" id="menu">
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Services</a>
+            <a href="#">Members</a>
+            <a href="#">Contacts</a>
+          </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+          <div>
+            <div class="kicker"><span class="dot"></span><span>High-Tech Gear Store</span></div>
+            <h1>G502 HERO WIRELESS</h1>
+            <div class="sub">Logitech’s High Performance Wireless Gaming Mouse</div>
+
+            <p>
+              The new generation of mouse design is packed with precision, speed, and comfort.
+              Built for pros and gamers who demand the best. It works for everything you need.
+            </p>
+
+            <div class="price">
+              <strong>USD 99.99</strong>
+              <span>Free shipping + 1-year warranty</span>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#">Add to Cart</a>
+              <a class="btn btn-ghost" href="#">More Details</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Product visual">
+            <div class="mouse"></div>
+            <div class="g502">G502</div>
+          </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider">
+          Which type of gear are you looking for?
+          <small>View more →</small>
+        </div>
+
+        <!-- Categories -->
+        <section class="cats" aria-label="Categories">
+          <a class="cat" href="#">
+            <div class="thumb">
+              <img alt="Gaming gear" src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=700&q=60">
+            </div>
+            <strong>Gaming</strong>
+          </a>
+
+          <a class="cat" href="#">
+            <div class="thumb">
+              <img alt="Graphic design gear" src="https://images.unsplash.com/photo-1559027615-cdcb7a9d60b1?auto=format&fit=crop&w=700&q=60">
+            </div>
+            <strong>Graphic Design</strong>
+          </a>
+
+          <a class="cat" href="#">
+            <div class="thumb">
+              <img alt="Office gear" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=700&q=60">
+            </div>
+            <strong>Office &amp; Others</strong>
+          </a>
+        </section>
+
+        <!-- Services -->
+        <section class="services" aria-label="Services">
+          <h2>SERVICES</h2>
+          <h3>We provide more than high-tech products!</h3>
+          <p>View more →</p>
+
+          <div class="service-grid">
+            <div class="service">
+              <div class="svc-ico">🛡</div>
+              <div>
+                <strong>Lifetime Guarantee</strong>
+                <span>Premium support and warranty for long-term performance and peace of mind.</span>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="svc-ico">💸</div>
+              <div>
+                <strong>Good Price</strong>
+                <span>Competitive pricing with the best value for quality and durability.</span>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="svc-ico">⬆</div>
+              <div>
+                <strong>Free Software Updates</strong>
+                <span>New features, security enhancements, and improvements at no extra cost.</span>
+              </div>
+            </div>
+
+            <div class="service">
+              <div class="svc-ico">⏱</div>
+              <div>
+                <strong>24/7 Support</strong>
+                <span>Always-on assistance for troubleshooting, setup, and product recommendations.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Members -->
+        <section class="members" aria-label="Members">
+          <h3>We proudly introduce our powerful members</h3>
+          <small>View more →</small>
+
+          <div class="logos" aria-label="Brand logos">
+            <div class="logo-box"><span>G</span></div>
+            <div class="logo-box"><span>T</span></div>
+            <div class="logo-box"><span>X</span></div>
+            <div class="logo-box"><span>⚡</span></div>
+          </div>
+        </section>
+
+        <footer>
+          <span>© <span id="year"></span> techgear. All rights reserved.</span>
+          <span>Privacy • Terms • Support</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('menu');
+
+    function toggleMenu(){
+      const open = menu.style.display === 'block';
+      menu.style.display = open ? 'none' : 'block';
+    }
+
+    burger.addEventListener('click', toggleMenu);
+    burger.addEventListener('keypress', (e)=>{ if(e.key === 'Enter') toggleMenu(); });
+
+    document.addEventListener('click', (e)=>{
+      if(!menu.contains(e.target) && !burger.contains(e.target)){
+        menu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
